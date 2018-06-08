@@ -32,7 +32,7 @@
 		.divsin {
 			display: inline-block;
 			*display: inline;
-			width: 33.333%;
+			width: 30%;
 			float: left;
 		}
 		input {
@@ -51,18 +51,19 @@
 					<div id="taskname" class="divsin" style="background-color: {{task.color}}">{{ task.name }} </div>
 					<div id="taskstatus" class="divsin" style="background-color: {{task.color}}"> {{ task.status }} </div>
 					<div id="taskpriority" class="divsin" style="background-color: {{task.color}}"> {{ task.priority }} </div>
+					<div>
+						<button class="btn btn-info" style="width: 10%; height: 100%" id="{{task.id}}" onclick="delItem(this.id)">DEL</button>
+					</div>
 				</li>
 			{% endfor %}
-				<li id="{{ task.id }}">
 					<div id="taskname" class="divsin">
 						<input style="background-color: orange" type="text" name="taskname" id="in_taskname" /> </div>
 					<div  id="taskstatus" class="divsin">
-						<input style="background-color: orange" type="text" name="taskstatus" id="in_taskstatus" /></div>
+						</div>
 					<div id="taskpriority" class="divsin">
-						<input style="background-color: orange" type="text" name="taskpriority" id="in_taskpriority" /></div>
-						<button onclick="addItem()">button</button>
-				</li>
+						</div>
 		</ul>
+						<button onclick="addItem()">button</button>
 		{% endif %}
 	</div>
 </div>	
