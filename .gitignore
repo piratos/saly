@@ -1,1 +1,7 @@
 *.pyc
+bin
+lib
+local
+include
+Lib
+Scripts
