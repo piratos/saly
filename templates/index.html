@@ -49,27 +49,53 @@
 			{% for task in tasks %}
 				<li id="{{ task.id }}">
 					<div id="taskname" class="divsin" style="background-color: {{task.color}}" onclick="">{{ task.name }} </div>
-					<div id="taskstatus" class="divsin" style="background-color: {{task.color}}"> {{ task.status }} </div>
-					<div id="taskpriority" class="divsin" style="background-color: {{task.color}}"> {{ task.priority }} </div>
+					<div id="taskstatus" class="divsin" style="background-color: {{task.color}}">
+						<select style="height: 50px;" class="form-control" taskid={{task.id}} onchange="changeStatus(this.value, this.getAttribute('taskid'))">
+							{% for status_choice in status %}
+								{% if status_choice == task.status %}
+									<option value="{{ status_choice }}" selected>{{ status_choice }}</option>
+								{% else %}
+									<option value="{{ status_choice }}">{{ status_choice }}</option>
+								{% endif %}
+							{% endfor %}
+						</select>
+					</div>
+					<div id="taskpriority" class="divsin" style="background-color: {{task.color}}">
+						<input type="range" id="ex1" min="0" max="9" step="1" value="9"/>
+					</div>
 					<div>
-						<button class="btn btn-info" style="width: 10%; height: 100%" taskid="{{task.id}}" onclick="delItem(this.taskid)">DEL</button>
+						<button class="btn btn-info" style="width: 10%; height: 100%" taskid="{{task.id}}" onclick="delItem(this.getAttribute('taskid'))">DEL</button>
 					</div>
 				</li>
 			{% endfor %}
 		</ul>
 					<div id="taskname" class="divsin">
-						<input style="background-color: orange" type="text" name="taskname" id="in_taskname" /> </div>
+						<input style="background-color: orange" type="text" name="taskname" id="in_taskname" />
+					</div>
+					
 					<div  id="taskstatus" class="divsin">
-						</div>
+					</div>
+					
 					<div id="taskpriority" class="divsin">
-						</div>
+					</div>
 						<button onclick="addItem()">button</button>
-	</div>
+					</div>
 </div>
 
 	<li id="li_template" hidden="hidden">
 		<div id="taskname" class="divsin" style="background-color: #ea4e4e" > </div>
-		<div id="taskstatus" class="divsin" style="background-color: #ea4e4e"> stuck </div>
+		<div id="taskstatus" class="divsin" style="background-color: #ea4e4e">
+			<select>
+				{% for st in status %}
+					{% if st == default_task %}
+						<option value="{{ st }}" selected="">{{ st }}</option>
+					{% else %}
+						<option value="{{ st }}">{{ st }}</option>
+					{% endif %}
+					}
+				{% endfor %}
+			</select>
+		</div>
 		<div id="taskpriority" class="divsin" style="background-color: #ea4e4e"> 9 </div>
 		<div>
 			<button class="btn btn-info" style="width: 10%; height: 100%" id="li_template_id" onclick="delItem(this.taskid)">DEL</button>

@@ -15,7 +15,6 @@ function addItem(){
   	$('#sortable').append(template);
   	template.removeAttr('hidden');
   	$('#in_taskname').val('');
-
   })
 }
 
@@ -27,9 +26,18 @@ function delItem(id){
 	})
 }
 
+function changeStatus(val, id){
+  console.log(val+' '+id);
+  $.get('/status/'+id+'/'+val+'/', function(data){
+    if (data=='OK'){
+
+    }
+  })
+}
 
 // Main routine
 $(document).ready(function(){
+$("#ex1").slider({});
 var changed = function( event, ui ) {
 };
 var theone = $("#sortable").sortable({change: changed});

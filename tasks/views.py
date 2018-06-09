@@ -11,6 +11,7 @@ def index(request):
 				  'done': '#529fff'}
 	status = [x[0] for x in status_choices]
 	tasks = ToDoTask.objects.order_by('id')
+	default_task = 'stuck'
 	for task in tasks:
 		task.color = color_code[task.status]
 	return render(request, 'index.html', locals())
