@@ -1,4 +1,7 @@
 from django.contrib import admin
 from tasks.models import ToDoTask
 
-admin.site.register(ToDoTask)
+class ToDoTaskAdmin(admin.ModelAdmin):
+	list_display = ('name', 'status', 'user')
+
+admin.site.register(ToDoTask, ToDoTaskAdmin)
