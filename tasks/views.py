@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from tasks.models import ToDoTask, status_choices
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.decorators import login_required
 
 import simplejson
 
@@ -10,9 +11,10 @@ color_code = {'stuck': '#c5c0bf',
 			  'canceled': '#ffea54',
 			  'done': '#7fdc7d'}
 
+@login_required
 def index(request):
 	status = [x[0] for x in status_choices]
-	tasks = ToDoTask.objects.order_by('id')
+	tasks = ToDoTask.objects.filter(user=request.user).order_by('-status')
 	default_task = 'stuck'
 	for task in tasks:
 		task.color = color_code[task.status]
