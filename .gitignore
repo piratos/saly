@@ -5,3 +5,5 @@ local
 include
 Lib
 Scripts
+db.sqlite3
+pip-selfcheck.json
