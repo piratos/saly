@@ -24,10 +24,11 @@ SECRET_KEY = '5vuqn27k(^av8vat4i_^+10_5*jst9d5k!puvwqn1#-02vntw7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+REGISTRATION_OPEN = True
 
 ALLOWED_HOSTS = []
 
-
+LOGIN_URL = '/accounts/login/'
 # Application definition
 
 INSTALLED_APPS = [
