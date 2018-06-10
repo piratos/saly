@@ -26,11 +26,14 @@ function delItem(id){
 	})
 }
 
+// TODO reset the select form if result is not OK
 function changeStatus(val, id){
   console.log(val+' '+id);
   $.get('/status/'+id+'/'+val+'/', function(data){
-    if (data=='OK'){
-
+  	console.log(data);
+    if (data['result'] == 'OK'){
+    	// change the color of the row
+    	$('#'+id).children().css('background-color', data['color'])
     }
   })
 }

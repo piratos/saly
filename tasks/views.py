@@ -2,13 +2,15 @@ from django.shortcuts import render, HttpResponse
 from tasks.models import ToDoTask, status_choices
 from django.contrib.auth.models import AnonymousUser
 
+import simplejson
 
+
+color_code = {'stuck': '#c5c0bf',
+			  'in progress': '#529fff',
+			  'canceled': '#ffea54',
+			  'done': '#7fdc7d'}
 
 def index(request):
-	color_code = {'stuck': '#ea4e4e',
-				  'in progress': '#7fdc7d',
-				  'canceled': '#ffea54',
-				  'done': '#529fff'}
 	status = [x[0] for x in status_choices]
 	tasks = ToDoTask.objects.order_by('id')
 	default_task = 'stuck'
@@ -38,8 +40,9 @@ def set_status(request, id, status):
 		if status in (x[0] for x in status_choices):
 			task.status = status
 			task.save()
-			return HttpResponse('OK')
+			data = {'result': 'OK', 'color':color_code[status]}
 		else:
-			return HttpResponse('NoStatus')
+			data = {'result': 'NoStatus'}
 	except Exception as ex:
-		return HttpResponse(ex)
+		data = {'result': 'excetion', 'exception': ex}
+	return HttpResponse(simplejson.dumps(data), content_type='application/json')
