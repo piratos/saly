@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div id="register" class="container">
+		<form class="form-control" method="POST" action="">
+			{% csrf_token %}
+			{% for form_group in form %}
+				<div class="form-group">
+					{{ form_group.label }}<br>
+					{{ form_group.errors }}
+					{{ form_group.warnings }}
+					{{ form_group }}
+				</div>
+			{% endfor %}
+			<input type="submit" name="login" value="Login" class="btn btn-info">
+		</form>
+	</div>
+{% endblock%}
