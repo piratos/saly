@@ -14,7 +14,7 @@ color_code = {'stuck': '#c5c0bf',
 @login_required
 def index(request):
 	status = [x[0] for x in status_choices]
-	tasks = ToDoTask.objects.filter(user=request.user).order_by('-status')
+	tasks = ToDoTask.objects.filter(project__user=request.user).order_by('-status')
 	default_task = 'stuck'
 	for task in tasks:
 		task.color = color_code[task.status]

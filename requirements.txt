@@ -1,2 +1,8 @@
+confusable-homoglyphs==3.1.1
+Django==1.9
+django-filter==1.1.0
 django-registration==2.4.1
-django==1.9
+django-rest-framework==0.1.0
+djangorestframework==3.8.2
+Markdown==2.6.11
+simplejson==3.15.0
