@@ -1,77 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
+	{% block css %}
+		<link rel="stylesheet" href="{% static 'css/common.css' %}">
+		<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+	{% endblock %}
 
-
-{% block css %}
-	<link rel="stylesheet" type="text/css" href="{% static 'main.css'%}">
-{% endblock %}
-
-
-{% block content %}
-<div class="container">
-	<h1>Task list :</h1>
-	<div id="listcontainer">
-		<ul id="sortable">
-			{% for task in tasks %}
-				<li id="{{ task.id }}">
-					<div id="taskname" class="divsin" style="background-color: {{task.color}}" onclick="">{{ task.name }} </div>
-					<div id="taskstatus" class="divsin" style="background-color: {{task.color}}">
-						<select style="height: 50px;" class="form-control" taskid={{task.id}} onchange="changeStatus(this.value, this.getAttribute('taskid'))">
-							{% for status_choice in status %}
-								{% if status_choice == task.status %}
-									<option value="{{ status_choice }}" selected>{{ status_choice }}</option>
-								{% else %}
-									<option value="{{ status_choice }}">{{ status_choice }}</option>
-								{% endif %}
-							{% endfor %}
-						</select>
-					</div>
-					<div id="taskpriority" class="divsin" style="background-color: {{task.color}}">
-						<input type="range" id="ex1" min="0" max="9" step="1" value="9"/>
-					</div>
-					<div>
-						<button class="btn btn-info" style="width: 10%; height: 100%" taskid="{{task.id}}" onclick="delItem(this.getAttribute('taskid'))">DEL</button>
-					</div>
-				</li>
-			{% endfor %}
-		</ul>
-					<div id="taskname" class="divsin">
-						<input style="background-color: orange" type="text" name="taskname" id="in_taskname" />
-					</div>
-					
-					<div  id="taskstatus" class="divsin">
-					</div>
-					
-					<div id="taskpriority" class="divsin">
-					</div>
-						<button class="btn btn-success" onclick="addItem()">Add new Task</button>
-					</div>
-</div>
-
-	<li id="li_template" hidden="hidden">
-		<div id="taskname" class="divsin" style="background-color: #c5c0bf;" > </div>
-		<div id="taskstatus" class="divsin" style="background-color: #c5c0bf;">
-			<select  style="height: 50px;" class="form-control" taskid={{task.id}} onchange="changeStatus(this.value, this.getAttribute('taskid'))">
-				{% for st in status %}
-					{% if st == default_task %}
-						<option value="{{ st }}" selected="">{{ st }}</option>
-					{% else %}
-						<option value="{{ st }}">{{ st }}</option>
-					{% endif %}
-					}
-				{% endfor %}
-			</select>
+	{% block content %}
+		<div class="container" id="playground">
+		<h1>Reactjs-Todo List</h1>
+			<div id="todo"></div>
 		</div>
-		<div id="taskpriority" class="divsin" style="background-color: #c5c0bf;">
-						<input type="range" id="ex1" min="0" max="9" step="1" value="9"/>
-					</div>
-		<div>
-			<button class="btn btn-info" style="width: 10%; height: 100%" id="li_template_id" onclick="delItem(this.taskid)">DEL</button>
-		</div>
-	</li>
-{% endblock %}
+	{% endblock %}
 
-
-{% block js %}
-<script type="text/javascript" src="{% static 'main.js' %}"></script>
-{% endblock %}
+	{% block js %}
+		<script type="text/babel" src="{% static 'js/app.js' %}"></script>
+	{% endblock %}
